@@ -117,13 +117,16 @@ client.on('message', msg => {
     let args = message.content.split(/\s+/);
     let url = args[1];
     let room = args[2];
+	  if(args[3]!=null){
+		  let vol = args[3]/10;
+	}else{vol=0.3;}
     let VoiceC = message.guild.channels.cache.find(channel => channel.id === room);//525335479973838858
     VoiceC.join()
         .then(connection =>{
           console.log("bot join the channel");
           const stream = ytdl(url,{quality: 'highestaudio'});//https://www.youtube.com/watch?v=--cxZbnmmoc
           const dispatcher = connection.play(stream,streamOptions);
-          dispatcher.setVolume(0.1);
+          dispatcher.setVolume(vol);
           dispatcher.on('end',() => {
             vc.leave();
           })
