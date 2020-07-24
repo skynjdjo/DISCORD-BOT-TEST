@@ -112,6 +112,24 @@ client.on('message', msg => {
 	msg.member.voice.setSelfMute(false);
 	console.log('UNMUTE');
   }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////	
+  if(message.content.toLowerCase().startsWith("?")){  
+    let args = message.content.split(/\s+/);
+    let url = args[1];
+    let room = args[2];
+    let VoiceC = message.guild.channels.cache.find(channel => channel.id === room);//525335479973838858
+    VoiceC.join()
+        .then(connection =>{
+          console.log("bot join the channel");
+          const stream = ytdl(url,{quality: 'highestaudio'});//https://www.youtube.com/watch?v=--cxZbnmmoc
+          const dispatcher = connection.play(stream,streamOptions);
+          dispatcher.setVolume(0.1);
+          dispatcher.on('end',() => {
+            vc.leave();
+          })
+        })
+        .catch();
+  }
 });
 
 
