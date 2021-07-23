@@ -13,7 +13,7 @@ const discord = require("discord.js");
 const client = new discord.Client();
 const guild = new discord.Guild();
 //const config = require(process.env.discord_token);
-var ffmpeg = require('ffmpeg');
+//var ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 
 //登入通知(顯示於下方小黑框)
