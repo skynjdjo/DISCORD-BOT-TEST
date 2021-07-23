@@ -21,8 +21,6 @@ client.on("ready",()=>{
     console.log(`成功登入囉!${client.user.tag}`);
 });
 
-const broadcast = client.voice.createBroadcast();
-	  broadcast.play('可憐哪.mp3');
 const DDAY = new Date(2020, 7, 31, 17, 30, 0)
 const today = new Date();
 const poorU = new discord.MessageEmbed();
@@ -59,15 +57,7 @@ client.on('message', msg => {
 	
 	if(msg.author.id == '509053720575868939'){ban1=true;}
 	
-  else if(msg.author.id == '509053720575868939'&&gohFlag!=0){
-	console.log(msg.member.displayName + 'CMD: ' + 'chicken goh goh goh!!' );
-	if(msg.member.voice.channel){
-	var vc = msg.member.voice.channel.join().then(connection => {
-		const dispatcher = connection.play('yisell_sound_2014082323540096241_66366.mp3');
-		dispatcher.setVolume(0.5);
-		});
-	msg.reply('腰兩洞閉嘴');}else{msg.reply('腰兩洞閉嘴');}
-  }else if(msg.content.match('#JOIN')&&!msg.author.bot){
+else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	console.log('BOT IS JOIN TO YOUR VOICE CHANNEL!' );
 	if (msg.member.voice.channel) {
 		//console.log(msg.member.voice.channel);
@@ -220,20 +210,7 @@ client.on('message', msg => {
 	.catch(console.error);*/
 	
   }
- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
- if(msg.cleanContent.match('喔噢')&&!msg.author.bot){
-	console.log('喔噢<3');
-	var vc = msg.member.voice.channel.join().then(connection => {
-		const dispatcher = connection.play('喔噢.mp3');
-		dispatcher.setVolume(1);
-		});
-	//msg.reply('喔噢<3');
-  }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  if(msg.cleanContent.match('雞')&&!msg.author.bot){
-	console.log(':CHANGE:');
-	msg.reply(':middle_finger_tone5: ');
-  }
+ 
 });
 
 
