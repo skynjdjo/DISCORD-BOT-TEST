@@ -238,4 +238,4 @@ client.on('message', msg => {
 
 
 //機器人登入
-client.login(config.token);
+client.login(config);
