@@ -12,6 +12,7 @@
 const discord = require("discord.js");
 const client = new discord.Client();
 const guild = new discord.Guild();
+const PORT = process.env.PORT || 5000;
 //const config = require(process.env.discord_token);
 //var ffmpeg = require('ffmpeg');
 //const ytdl = require('ytdl-core');
@@ -216,3 +217,4 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 
 //機器人登入
 client.login(process.env.discord_token);
+server.listen(PORT);
