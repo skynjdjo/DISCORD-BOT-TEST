@@ -12,7 +12,7 @@
 const discord = require("discord.js");
 const client = new discord.Client();
 const guild = new discord.Guild();
-const config = require("process.env.discord-token");
+const config = require(process.env.discord-token);
 var ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 const PORT = process.env.PORT || 5000;
