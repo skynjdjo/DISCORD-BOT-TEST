@@ -12,7 +12,7 @@
 const discord = require("discord.js");
 const client = new discord.Client();
 const guild = new discord.Guild();
-const PORT = process.env.PORT || 5000;
+
 //const config = require(process.env.discord_token);
 //var ffmpeg = require('ffmpeg');
 //const ytdl = require('ytdl-core');
@@ -217,4 +217,16 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 
 //機器人登入
 client.login(process.env.discord_token);
-server.listen(PORT);
+ 
+var express = require('express');
+var app     = express();
+
+app.set('port', (process.env.PORT || 5000));
+
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
+});
