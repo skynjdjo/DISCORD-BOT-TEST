@@ -16,7 +16,7 @@
     "git": "^0.1.5",
     "python": "0.0.4",
     "ytdl": "^1.4.1",
-    "ytdl-core": "^4.2.1"
+    //"ytdl-core": "^4.2.1"
   },
   "devDependencies": {},
   "description": ""
