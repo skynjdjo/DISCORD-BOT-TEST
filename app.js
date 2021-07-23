@@ -12,7 +12,7 @@
 const discord = require("discord.js");
 const client = new discord.Client();
 const guild = new discord.Guild();
-const config = require(process.env.discord_token);
+//const config = require(process.env.discord_token);
 var ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
 
@@ -238,4 +238,4 @@ client.on('message', msg => {
 
 
 //機器人登入
-client.login(config);
+client.login(process.env.discord_token);
