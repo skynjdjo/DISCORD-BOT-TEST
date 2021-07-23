@@ -15,7 +15,6 @@ const guild = new discord.Guild();
 const config = require(process.env.discord-token);
 var ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
-const PORT = process.env.PORT || 5000;
 
 //登入通知(顯示於下方小黑框)
 client.on("ready",()=>{
@@ -240,4 +239,3 @@ client.on('message', msg => {
 
 //機器人登入
 client.login(config.token);
-server.listen(PORT);
