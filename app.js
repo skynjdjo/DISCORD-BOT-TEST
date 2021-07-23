@@ -1,10 +1,21 @@
+///////////////////////////////////////////////
 
+//  !n ID "NAME"  改暱稱
+//  !k ID 踢出
+//  !mu ID 0/1 鎖mic
+//  !df ID 0/1 鎖lISTEN
+//  !move ID ChinelID 移動頻道
+//  !ban ID DAY 
+
+///////////////////////////////////////////////
 //套件跟設定檔載入的部分
 const discord = require("discord.js");
 const client = new discord.Client();
+const guild = new discord.Guild();
 const config = require("./config.json");
 var ffmpeg = require('ffmpeg');
 const ytdl = require('ytdl-core');
+const PORT = process.env.PORT || 5000;
 
 //登入通知(顯示於下方小黑框)
 client.on("ready",()=>{
@@ -19,6 +30,7 @@ const poorU = new discord.MessageEmbed();
 var gohFlag = 0;
 var ban1 = false;
 
+
 function M2D(A,B){
 	var i = 0;
 	var D = 0;
@@ -29,37 +41,26 @@ function M2D(A,B){
 	return D;
 }
 
+function steamplay(VoiceC,url,vol){
+	VoiceC.join()
+        .then(connection =>{
+          console.log("bot join the channel");
+          const stream = ytdl(url,{quality: 'highestaudio'});//https://www.youtube.com/watch?v=--cxZbnmmoc
+          const dispatcher = connection.play(stream);
+          dispatcher.setVolume(vol);
+        });
+}
+
 
 client.on('message', msg => {
 	
+	//const targetID = msg.guild.members.cache.get('509053720575868939');
+	
+	//const targetNAME = guild.member(targetID);
+	
 	if(msg.author.id == '509053720575868939'){ban1=true;}
 	
-  if (msg.content.match('退伍')&&!msg.author.bot) {
-	console.log(msg.member.displayName + 'CMD: ' + '退伍' );
-	  if (msg.member.voice.channel) {
-	  var vc = msg.member.voice.channel.join().then(connection => {
-  // You can play a file or a stream here:
-		const dispatcher = connection.play('讓我們繼續看下去.mp3');
-		dispatcher.setVolume(0.3);
-		//dispatcher.on('start',playing =>{msg.reply(poorU);}); 
-										});
-		
-		//var leaveVC = msg.member.voice.channel.leave();
-		poorU.setImage('https://imgs.niusnews.com/upload/imgs/default/2017MayP/0525hippo/3.png');
-		poorU.setTitle('距離重出江湖還有' + (M2D(DDAY.getMonth(),today.getMonth())+(DDAY.getDate()-today.getDate())) + '日' + (24-today.getHours()) + '時');
-		poorU.setDescription('綠色的鋼盔　是菜雞待退的渴望\n軍綠的內衣　是宸誌被操的汗液\n迷彩的外衣　是新訓放假的期待\n一條條揚起的勾勾\n是一個個想玩爆你的班長\n上層一條條勾魂攝魄的槓槓\n隱藏著新兵間最激動的怨氣\n新訓中心的長官，冷眼旁觀又迷失人生\n那股充滿爛泥和汗水的氣味，我們稱之為張宸誌的菜味。');
-		msg.reply(poorU);
-    //msg.reply('距離重出江湖還有' + (M2D(DDAY.getMonth(),today.getMonth())+(DDAY.getDate()-today.getDate())) + '日' + (24-today.getHours()) + '時');
-	//console.log(M2D(DDAY.getMonth(),today.getMonth()));
-	  }else{
-		poorU.setImage('https://imgs.niusnews.com/upload/imgs/default/2017MayP/0525hippo/3.png');
-		poorU.setTitle('距離重出江湖還有' + (M2D(DDAY.getMonth(),today.getMonth())+(DDAY.getDate()-today.getDate())) + '日' + (24-today.getHours()) + '時');
-		poorU.setDescription('綠色的鋼盔　是菜雞待退的渴望\n軍綠的內衣　是宸誌被操的汗液\n迷彩的外衣　是新訓放假的期待\n一條條揚起的勾勾\n是一個個想玩爆你的班長\n上層一條條勾魂攝魄的槓槓\n隱藏著新兵間最激動的怨氣\n新訓中心的長官，冷眼旁觀又迷失人生\n那股充滿爛泥和汗水的氣味，我們稱之為張宸誌的菜味。');
-		msg.reply(poorU);
-		//msg.reply('距離重出江湖還有' + (M2D(DDAY.getMonth(),today.getMonth())+(DDAY.getDate()-today.getDate())) + '日' + (24-today.getHours()) + '時');
-		//msg.reply(poorU);
-		}
-  }else if(msg.author.id == '509053720575868939'&&gohFlag!=0){
+  else if(msg.author.id == '509053720575868939'&&gohFlag!=0){
 	console.log(msg.member.displayName + 'CMD: ' + 'chicken goh goh goh!!' );
 	if(msg.member.voice.channel){
 	var vc = msg.member.voice.channel.join().then(connection => {
@@ -94,26 +95,149 @@ client.on('message', msg => {
 		
 	  }else {
 	msg.reply('You need to join a voice channel first!');}
-	  
-  } else if(msg.content == 'BYE'&&!msg.author.bot){
+  }else if(msg.content == '!o'&&!msg.author.bot){
 	 msg.member.voice.channel.leave(); 
 	 ban1 = false;
-  }else if(msg.author.id == '525324919542644738' && msg.cleanContent.match('@CHANGEEEEEEEE')){
-	console.log('甲慶記啦!!');
-	if(msg.member.voice.channel){
-	var vc = msg.member.voice.channel.join().then(connection => {
-		const dispatcher = connection.play('bar.wav');
-		dispatcher.setVolume(0.5);
-		});
-	msg.reply('甲慶記啦!!');}else{msg.reply('甲慶記啦!!');}
+  }else if(msg.author.id == '509053720575868939' && msg.content == '中鋼噁男'){
+	console.log('老司機');
+	msg.reply('新烏日狗幹老司機');
   }else if(msg.content == 'gohgohgoh'&&!msg.author.bot){
   if(gohFlag==0){gohFlag=1;console.log('答錄機GOH~');}else{gohFlag=0;console.log('答錄機CLOSED');}
   }else if(msg.author.id == '431364619454513162' && msg.content.match('#UNMUTE')){
 	msg.member.voice.setSelfMute(false);
 	console.log('UNMUTE');
   }
+///////////////////////////////////////////撥音樂///////////////////////////////////////////////////////////	
+  else if(msg.content.toLowerCase().startsWith("!p")){  
+	let conFlag = false;
+    let args = msg.content.split(/\s+/);
+	let url,room,vol;
+	if(args.length<=1){conFlag = false;}else{
+		url = args[1];
+		if(url[0]=='h'&&url[1]=='t'&&url[2]=='t'&&url[3]=='p'){conFlag = true;}
+		room = args[2];
+	//console.log(args.length);
+	//let cycle = args[4];
+	//if(cycle==null){cycle = 1;}
+		if(args.length < 3){room = msg.member.voice.channel.id;}
+		if(args[3]!=null){vol = args[3]/10;}else{vol = 0.1;}
+	}
+	if(conFlag){
+		let VoiceC = msg.guild.channels.cache.find(channel => channel.id == room);//525335479973838858
+		let logrt = steamplay(VoiceC,url,vol);
+	}else{console.log("wrong url");msg.reply("Wrong url");}
+	//console.log(logrt);
+	/*var vc = msg.member.voice.channel.join().then(connection => {
+		console.log("bot join the channel");
+          const stream = ytdl(url,{quality: 'highestaudio'});//https://www.youtube.com/watch?v=--cxZbnmmoc
+          const dispatcher = connection.play(stream);
+	});*/
+  }
+ ///////////////////////////////////////////改暱稱//////////////////////////////////////////////////////////
+  if(msg.content.toLowerCase().startsWith('!n')&&!msg.author.bot&&msg.author.id == '431364619454513162'){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	let nickname = args[2];
+	let targetID = msg.guild.members.cache.get(tID);
+	console.log("TARGET:" + targetID);
+	targetID.setNickname(nickname)
+			  .then(updated => console.log(`Updated guild name to ${guild}`))
+			  .catch(console.error);
+  }
+ ///////////////////////////////////////////設靜音////////////////////////////////////////////////////////// 
+ if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!mu")){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	let muteswitch = args[2];
+	let vc = msg.member.voice.channel.join().then(connection =>{
+		let vcc = connection.voice.guild.members.cache.get(tID);
+		console.log("TARGET:" + vcc);
+		vcc.voice.setMute(muteswitch);
+	});
+  }
+///////////////////////////////////////////不給聽////////////////////////////////////////////////////////// 
+ if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!df")){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	let muteswitch = args[2];
+	let vc = msg.member.voice.channel.join().then(connection =>{
+		let vcc = connection.voice.guild.members.cache.get(tID);
+		console.log("TARGET:" + vcc);
+		vcc.voice.setDeaf(muteswitch);
+	});
+  }
+///////////////////////////////////////////移動語音頻道///////////////////////////////////////////////////////////	
+ if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!move")){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	let moveTAR = args[2];
+	let vc = msg.member.voice.channel.join().then(connection =>{
+		let vcc = connection.voice.guild.members.cache.get(tID);
+		console.log("TARGET:" + vcc);
+		vcc.voice.setChannel(moveTAR);
+	});
+	
+	
+	//targetID.kick('欠踢');
+	/*mineID.setNickname('KUMAdjo')
+		  .then(updated => console.log(`Updated guild name to ${guild}`))
+	.catch(console.error);*/
+	
+  }
+ /////////////////////////////////////////////滾出去////////////////////////////////////////////////////////////////
+ if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!k")){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	//let moveTAR = args[2];
+	let vc = msg.member.voice.channel.join().then(connection =>{
+		let vcc = connection.voice.guild.members.cache.get(tID);
+		console.log("KICK:" + vcc);
+		vcc.voice.kick();
+	});
+	
+	
+	//targetID.kick('欠踢');
+	/*mineID.setNickname('KUMAdjo')
+		  .then(updated => console.log(`Updated guild name to ${guild}`))
+	.catch(console.error);*/
+	
+  }
+  /////////////////////////////////////////////BAN////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!ban")){
+	let args = msg.content.split(/\s+/);
+	let tID = args[1];
+	let banday = args[2];
+	//let moveTAR = args[2];
+	let vc = msg.member.voice.channel.join().then(connection =>{
+		let vcc = connection.voice.guild.members.cache.get(tID);
+		console.log("ban:" + vcc + "DAY:" + banday);
+		vcc.voice.ban({ days: banday, reason: 'none' });
+	});
+	
+	
+	//targetID.kick('欠踢');
+	/*mineID.setNickname('KUMAdjo')
+		  .then(updated => console.log(`Updated guild name to ${guild}`))
+	.catch(console.error);*/
+	
+  }
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+ if(msg.cleanContent.match('喔噢')&&!msg.author.bot){
+	console.log('喔噢<3');
+	var vc = msg.member.voice.channel.join().then(connection => {
+		const dispatcher = connection.play('喔噢.mp3');
+		dispatcher.setVolume(1);
+		});
+	//msg.reply('喔噢<3');
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if(msg.cleanContent.match('雞')&&!msg.author.bot){
+	console.log(':CHANGE:');
+	msg.reply(':middle_finger_tone5: ');
+  }
 });
 
 
 //機器人登入
 client.login(config.token);
+server.listen(PORT);
