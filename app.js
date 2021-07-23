@@ -14,7 +14,7 @@ const client = new discord.Client();
 const guild = new discord.Guild();
 //const config = require(process.env.discord_token);
 //var ffmpeg = require('ffmpeg');
-const ytdl = require('ytdl-core');
+//const ytdl = require('ytdl-core');
 
 //登入通知(顯示於下方小黑框)
 client.on("ready",()=>{
@@ -40,7 +40,7 @@ function M2D(A,B){
 	return D;
 }
 
-function steamplay(VoiceC,url,vol){
+/*function steamplay(VoiceC,url,vol){
 	VoiceC.join()
         .then(connection =>{
           console.log("bot join the channel");
@@ -48,7 +48,7 @@ function steamplay(VoiceC,url,vol){
           const dispatcher = connection.play(stream);
           dispatcher.setVolume(vol);
         });
-}
+}*/
 
 
 client.on('message', msg => {
@@ -123,10 +123,10 @@ client.on('message', msg => {
 	}
 	if(conFlag){
 		let VoiceC = msg.guild.channels.cache.find(channel => channel.id == room);//525335479973838858
-		let logrt = steamplay(VoiceC,url,vol);
+	//	let logrt = steamplay(VoiceC,url,vol);
 	}else{console.log("wrong url");msg.reply("Wrong url");}
 	//console.log(logrt);
-	/*var vc = msg.member.voice.channel.join().then(connection => {
+	/*var vc = msg.member.voice.channel.join().then(connection => {//
 		console.log("bot join the channel");
           const stream = ytdl(url,{quality: 'highestaudio'});//https://www.youtube.com/watch?v=--cxZbnmmoc
           const dispatcher = connection.play(stream);
