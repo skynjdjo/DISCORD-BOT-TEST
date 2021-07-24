@@ -8,9 +8,9 @@
 //  !ban ID DAY 
 
 ///////////////////////////////////////////////
-const express = require('express')
-const app = express()
-const port = 5000
+const express = require('express');
+const app = express();
+const port = 5000;
 app.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
