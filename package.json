@@ -12,6 +12,7 @@
     "@discordjs/opus": "^0.1.0",
     "discord-ytdl-core": "^4.0.7",
     "discord.js": "^12.2.0",
+    "http": "0.0.1-security",
     "electron": "^11.1.0",
     "git": "^0.1.5",
     "python": "0.0.4",
