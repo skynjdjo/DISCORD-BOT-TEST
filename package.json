@@ -16,7 +16,6 @@
     "http": "0.0.1-security",
     "electron": "^11.1.0",
     "git": "^0.1.5",
-    "python": "0.0.4",
     "express": "^4.17.1",
     "ytdl-core": "^4.2.1"
   },
