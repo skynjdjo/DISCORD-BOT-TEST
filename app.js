@@ -11,11 +11,12 @@
 const express = require('express');
 const app = express();
 const port = 5000;
+app.set(port);
 app.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
 }).listen(port, function() {
-    console.log('App is running, server is listening on port5000');
+    console.log('App is running, server is listening on port 5000');
 });
 //////////////////////////////////////////////
 
