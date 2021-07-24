@@ -10,7 +10,7 @@
 ///////////////////////////////////////////////
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = process.env.PORT;
 app.set(port);
 app.get('/', function(request, response) {
     var result = 'App is running'
