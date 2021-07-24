@@ -91,6 +91,9 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
   }else if(msg.author.id == '509053720575868939' && msg.content == '中鋼噁男'){
 	console.log('老司機');
 	msg.reply('新烏日狗幹老司機');
+  }else if(msg.author.id == '509053720575868939' && msg.content == '低能兒'){
+	console.log('老司機');
+	msg.reply('新烏日低能老司機');
   }else if(msg.content == 'gohgohgoh'&&!msg.author.bot){
   if(gohFlag==0){gohFlag=1;console.log('答錄機GOH~');}else{gohFlag=0;console.log('答錄機CLOSED');}
   }else if(msg.author.id == '431364619454513162' && msg.content.match('#UNMUTE')){
