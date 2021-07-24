@@ -10,6 +10,9 @@
 ///////////////////////////////////////////////
 
 const PORT = process.env.PORT || 5000;
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+});
 server.listen(PORT);
 
 //套件跟設定檔載入的部分
