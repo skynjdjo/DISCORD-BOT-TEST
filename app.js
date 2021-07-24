@@ -8,12 +8,16 @@
 //  !ban ID DAY 
 
 ///////////////////////////////////////////////
-const http = require("http");
-const PORT = process.env.PORT || 5000;
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
+const express = require('express')
+const app = express()
+const port = 5000
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
 });
-server.listen(PORT);
+//////////////////////////////////////////////
 
 //套件跟設定檔載入的部分
 const discord = require("discord.js");
