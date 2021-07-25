@@ -146,7 +146,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let targetID = msg.guild.members.cache.get(tID);
 	console.log("TARGET:" + targetID);
 	targetID.setNickname(nickname)
-			  .then(updated => console.log(`Updated guild name to ${guild}`))
+			  .then(updated => {console.log(`Updated guild name to ${guild}`);msg.member.voice.channel.leave();})
 			  .catch(console.error);
 
   }
@@ -158,7 +158,8 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let vc = msg.member.voice.channel.join().then(connection =>{
 		let vcc = connection.voice.guild.members.cache.get(tID);
 		console.log("TARGET:" + vcc);
-		vcc.voice.setMute(muteswitch);
+		vcc.voice.setMute(muteswitch)
+				.then(updated => msg.member.voice.channel.leave());
 	});
   }
 ///////////////////////////////////////////不給聽////////////////////////////////////////////////////////// 
@@ -169,7 +170,8 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let vc = msg.member.voice.channel.join().then(connection =>{
 		let vcc = connection.voice.guild.members.cache.get(tID);
 		console.log("TARGET:" + vcc);
-		vcc.voice.setDeaf(muteswitch);
+		vcc.voice.setDeaf(muteswitch)
+				.then(updated => msg.member.voice.channel.leave());
 	});
   }
 ///////////////////////////////////////////移動語音頻道///////////////////////////////////////////////////////////	
@@ -180,7 +182,8 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let vc = msg.member.voice.channel.join().then(connection =>{
 		let vcc = connection.voice.guild.members.cache.get(tID);
 		console.log("TARGET:" + vcc);
-		vcc.voice.setChannel(moveTAR);
+		vcc.voice.setChannel(moveTAR)
+				.then(updated => msg.member.voice.channel.leave());
 	});
 	
 	//targetID.kick('欠踢');
@@ -197,7 +200,8 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let vc = msg.member.voice.channel.join().then(connection =>{
 		let vcc = connection.voice.guild.members.cache.get(tID);
 		console.log("KICK:" + vcc);
-		vcc.voice.kick();
+		vcc.voice.kick()
+			.then(updated => msg.member.voice.channel.leave());
 	});
 	
 	//targetID.kick('欠踢');
@@ -215,7 +219,8 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let vc = msg.member.voice.channel.join().then(connection =>{
 		let vcc = connection.voice.guild.members.cache.get(tID);
 		console.log("ban:" + vcc + "DAY:" + banday);
-		vcc.voice.ban({ days: banday, reason: 'none' });
+		vcc.voice.ban({ days: banday, reason: 'none' })
+			.then(updated => msg.member.voice.channel.leave());
 	});
 	
 	//targetID.kick('欠踢');
