@@ -146,7 +146,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	let targetID = msg.guild.members.cache.get(tID);
 	console.log("TARGET:" + targetID);
 	targetID.setNickname(nickname)
-			  .then(updated => {console.log(`Updated guild name to ${guild}`);msg.member.voice.channel.leave();})
+			  .then(updated => {console.log(`Updated guild name`);msg.member.voice.channel.leave();})
 			  .catch(console.error);
 
   }
