@@ -148,6 +148,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 	targetID.setNickname(nickname)
 			  .then(updated => console.log(`Updated guild name to ${guild}`))
 			  .catch(console.error);
+	msg.member.voice.channel.leave(); 
   }
  ///////////////////////////////////////////設靜音////////////////////////////////////////////////////////// 
  if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!mu")){
@@ -159,6 +160,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 		console.log("TARGET:" + vcc);
 		vcc.voice.setMute(muteswitch);
 	});
+	msg.member.voice.channel.leave(); 
   }
 ///////////////////////////////////////////不給聽////////////////////////////////////////////////////////// 
  if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!df")){
@@ -170,6 +172,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 		console.log("TARGET:" + vcc);
 		vcc.voice.setDeaf(muteswitch);
 	});
+	msg.member.voice.channel.leave(); 
   }
 ///////////////////////////////////////////移動語音頻道///////////////////////////////////////////////////////////	
  if(msg.author.id == '431364619454513162' && msg.cleanContent.match("!move")){
@@ -182,7 +185,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 		vcc.voice.setChannel(moveTAR);
 	});
 	
-	
+	msg.member.voice.channel.leave(); 
 	//targetID.kick('欠踢');
 	/*mineID.setNickname('KUMAdjo')
 		  .then(updated => console.log(`Updated guild name to ${guild}`))
@@ -199,7 +202,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 		console.log("KICK:" + vcc);
 		vcc.voice.kick();
 	});
-	
+	msg.member.voice.channel.leave(); 
 	
 	//targetID.kick('欠踢');
 	/*mineID.setNickname('KUMAdjo')
@@ -218,7 +221,7 @@ else if(msg.content.match('#JOIN')&&!msg.author.bot){
 		console.log("ban:" + vcc + "DAY:" + banday);
 		vcc.voice.ban({ days: banday, reason: 'none' });
 	});
-	
+	msg.member.voice.channel.leave(); 
 	
 	//targetID.kick('欠踢');
 	/*mineID.setNickname('KUMAdjo')
